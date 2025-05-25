@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام الامتحانات الإلكترونية</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+        }
+        .exam-info {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+        .question {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #eee;
+            background-color: #fff;
+        }
+        .options {
+            margin-right: 20px;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .timer {
+            text-align: center;
+            font-size: 24px;
+            margin: 20px 0;
+            color: #d9534f;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 0 0 5px 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>نظام الامتحانات الإلكترونية</h1>
+            <p>امتحان مادة: [اسم المادة]</p>
+        </header>
+
+        <div class="exam-info">
+            <h3>معلومات الامتحان:</h3>
+            <p><strong>الوقت المتبقي:</strong> <span id="time">01:00:00</span></p>
+            <p><strong>عدد الأسئلة:</strong> 20 سؤال</p>
+            <p><strong>النوع:</strong> اختيار من متعدد</p>
+        </div>
+
+        <div class="timer" id="timer">
+            الوقت المتبقي: 60:00
+        </div>
+
+        <div class="question">
+            <h3>السؤال 1:</h3>
+            <p>ما هي عاصمة المملكة العربية السعودية؟</p>
+            <div class="options">
+                <input type="radio" id="q1-1" name="q1" value="1">
+                <label for="q1-1">جدة</label><br>
+                <input type="radio" id="q1-2" name="q1" value="2">
+                <label for="q1-2">الرياض</label><br>
+                <input type="radio" id="q1-3" name="q1" value="3">
+                <label for="q1-3">الدمام</label><br>
+                <input type="radio" id="q1-4" name="q1" value="4">
+                <label for="q1-4">مكة المكرمة</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <h3>السؤال 2:</h3>
+            <p>ما هي لغة البرمجة المستخدمة لإنشاء صفحات ويب تفاعلية؟</p>
+            <div class="options">
+                <input type="radio" id="q2-1" name="q2" value="1">
+                <label for="q2-1">HTML</label><br>
+                <input type="radio" id="q2-2" name="q2" value="2">
+                <label for="q2-2">CSS</label><br>
+                <input type="radio" id="q2-3" name="q2" value="3">
+                <label for="q2-3">JavaScript</label><br>
+                <input type="radio" id="q2-4" name="q2" value="4">
+                <label for="q2-4">Python</label>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <button class="btn" onclick="submitExam()">تسليم الامتحان</button>
+        </div>
+
+        <footer>
+            <p>جميع الحقوق محفوظة &copy; 2023 نظام الامتحانات الإلكترونية</p>
+        </footer>
+    </div>
+
+    <script>
+        // تنزيل العداد
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = "الوقت المتبقي: " + minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    timer = duration;
+                    alert("انتهى وقت الامتحان!");
+                    submitExam();
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            var fiveMinutes = 60 * 60, // 60 دقيقة
+                display = document.querySelector('#timer');
+            startTimer(fiveMinutes, display);
+        };
+
+        function submitExam() {
+            if(confirm("هل أنت متأكد من تسليم الامتحان؟")) {
+                alert("تم تسليم الامتحان بنجاح. شكراً لك!");
+                // هنا يمكن إضافة كود إرسال الإجابات إلى الخادم
+            }
+        }
+    </script>
+</body>
+</html>
